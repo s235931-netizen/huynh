@@ -23,7 +23,9 @@ jobs:
 
       - name: Check Node process
         run: ps aux | grep node
+
       - name: Check port 5000
-      run: ss -lntp | grep 5000
-       - name: Test API
+        run: ss -lntp | grep 5000
+
+      - name: Test API
         run: curl http://localhost:5000/api/hello
