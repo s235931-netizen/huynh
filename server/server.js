@@ -45,7 +45,17 @@ app.get("/api/students", async (req, res) => {
         });
     }
 });
-
+app.post("/api/students", async (req, res) => {
+    try {
+        const student = await Student.create(req.body);
+        res.status(201).json(student);
+    } catch (err) {
+        res.status(400).json({
+            message: "Lỗi thêm sinh viên",
+            error: err.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
