@@ -35,7 +35,8 @@ jobs:
           curl -i http://localhost:5000/api/students
       - name: Câu 41 - POST student
         run: |
-          echo "POST /api/students"
+          STUDENT_ID="SV$(date +%s)"
+          echo "POST /api/students - $STUDENT_ID"
           curl -i -X POST http://localhost:5000/api/students \
             -H "Content-Type: application/json" \
-            -d '{"studentId":"SV003","name":"Nguyen Van C","email":"nguyenvanc@gmail.com"}'
+            -d '{\"studentId\":\"$STUDENT_ID\",\"name\":\"Nguyen Van C\",\"email\":\"nguyenvanc@gmail.com\"}'
