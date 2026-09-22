@@ -78,6 +78,27 @@ app.put("/api/students/:id", async (req, res) => {
         });
     }
 });
+app.delete("/api/students/:id", async (req, res) => {
+    try {
+        const student = await Student.findByIdAndDelete(req.params.id);
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Không tìm thấy sinh viên"
+            });
+        }
+
+        res.json({
+            message: "Xóa sinh viên thành công",
+            student
+        });
+    } catch (err) {
+        res.status(400).json({
+            message: "Lỗi xóa sinh viên",
+            error: err.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
