@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "GET /api/students"
           curl -i http://localhost:5000/api/students
-          - name: Câu 41 - POST student
+      - name: Câu 41 - POST student
         run: |
           echo "POST /api/students"
           curl -i -X POST http://localhost:5000/api/students \
