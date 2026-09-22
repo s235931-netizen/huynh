@@ -38,4 +38,4 @@ jobs:
           echo "POST /api/students"
           curl -i -X POST http://localhost:5000/api/students \
             -H "Content-Type: application/json" \
-            -d '{"studentId":"SV001","name":"Nguyen Van A","email":"nguyenvana@gmail.com"}'
+            -d '{"studentId":"SV002","name":"Nguyen Van C","email":"nguyenvanc@gmail.com"}'
