@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const Student = require("./models/Student");
 
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 app.use(express.json());
+
 const PORT = Number(process.env.PORT) || 5000;
 
 const connectToMongoDB = async () => {
@@ -32,20 +34,18 @@ app.get("/api/hello", (req, res) => {
     });
 });
 
-app.get("/api/students", (req, res) => {
-    res.json([
-        {
-            id: 1,
-            name: "Nguyen Van A"
-        },
-        {
-            id: 2,
-            name: "Tran Thi B"
-        }
-    ]);
+app.get("/api/students", async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch (err) {
+        res.status(500).json({
+            message: "Lỗi lấy danh sách sinh viên",
+            error: err.message
+        });
+    }
 });
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    connectToMongoDB();
 });
