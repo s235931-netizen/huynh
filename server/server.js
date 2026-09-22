@@ -56,6 +56,28 @@ app.post("/api/students", async (req, res) => {
         });
     }
 });
+app.put("/api/students/:id", async (req, res) => {
+    try {
+        const student = await Student.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Không tìm thấy sinh viên"
+            });
+        }
+
+        res.json(student);
+    } catch (err) {
+        res.status(400).json({
+            message: "Lỗi cập nhật sinh viên",
+            error: err.message
+        });
+    }
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
